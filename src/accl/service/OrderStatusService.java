@@ -10,11 +10,13 @@ import org.json.simple.JSONObject;
 
 public class OrderStatusService {
 
-	/*
-	 * GET METHOD WILL GET THE ORDER STATUS OF SINGLE ORDER
-	 */
 	public JSONObject get(String orderId) {
 
-		return null;
+		return null; // RETURN THE STATUS OF SINGLE ORDER
+	}
+
+	public JSONObject getLatestOrderStatus() {
+
+		return null; // FIND THE LATEST ORDER ID AND GET ITS STATUS FROM GET()
 	}
 }
