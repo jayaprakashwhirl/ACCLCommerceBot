@@ -4,5 +4,6 @@
 	"orderItems":3,
 	"orderTotal":1022,
 	"orderCurrency":"USD",
-	"shippingLocation":"Address"
+	"shippingLocation":"Address",
+	"shippingCharge":12
 }
