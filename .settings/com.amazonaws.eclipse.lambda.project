@@ -1,0 +1,6 @@
+#Lambda Function Project Metadata
+#Mon Jun 26 18:28:34 IST 2017
+lastDeploymentFunctionName=ACCLServiceEngine
+lastDeploymentBucketName=acclbucket
+lastDeploymentEndpoint=https\://lambda.us-east-1.amazonaws.com/
+lastInvokeInput={\n\t"orderId"\:"2211",\n\t"orderStatus"\:"process",\n\t"orderItems"\:3,\n\t"orderTotal"\:1022,\n\t"orderCurrency"\:"USD",\n\t"shippingLocation"\:"Address",\n\t"shippingCharge"\:12\n}
