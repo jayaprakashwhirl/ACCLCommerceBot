@@ -12,6 +12,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 import accl.service.OrderStatusService;
 import accl.util.ACCLConstant;
+import accl.util.ClientLookupManager;
 
 public class ACCLHandler implements RequestHandler<JSONObject, JSONObject> {
 	BasicAWSCredentials awsCredential = new BasicAWSCredentials(ACCLConstant.AWS_ACCESSKEY_ID,
@@ -21,13 +22,14 @@ public class ACCLHandler implements RequestHandler<JSONObject, JSONObject> {
 
 	public DynamoDB dynamoDB = new DynamoDB(client);
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public JSONObject handleRequest(JSONObject request, Context context) {
 		JSONObject response = new JSONObject();
-		String orderId = "100000031";
-		// request.put(ACCLConstant.SERVICE_REQUEST_TEXT,
-		// ACCLConstant.ORDER_STATUS_TEXT);
-		// request.put(ACCLConstant.ORDER_ID_TEXT, orderId);
+		ClientLookupManager clientLookup = new ClientLookupManager();
+		String clientId = clientLookup.getClientId((String) request.get("applicationId"),
+				(String) request.get("applicationAgent"));
+		request.put(ACCLConstant.CLIENT_ID_TEXT, clientId);
 
 		switch ((String) request.get(ACCLConstant.SERVICE_REQUEST_TEXT)) {
 		case ACCLConstant.ORDER_STATUS_TEXT:

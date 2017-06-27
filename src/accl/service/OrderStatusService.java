@@ -34,14 +34,19 @@ public class OrderStatusService {
 
 	@SuppressWarnings({ "unchecked" })
 	public JSONObject responseBuilder(JSONObject responseObject) {
-		JSONObject botResponseObject = new JSONObject();
 		String speechString = "";
-		if ((String) responseObject.get(ACCLConstant.ORDER_STATUS_TEXT) != null)
-			speechString = "your order id is " + (String) responseObject.get("OrderId") + ". The order status is "
-					+ (String) responseObject.get(ACCLConstant.ORDER_STATUS_TEXT) + ". Order total is "
-					+ (String) responseObject.get("orderTotal") + " " + (String) responseObject.get("orderCurrency");
-		else
-			speechString = "Invalid order id";
+		JSONObject botResponseObject = new JSONObject();
+		if (responseObject != null) {
+			if ((String) responseObject.get(ACCLConstant.ORDER_STATUS_TEXT) != null)
+				speechString = "your order id is " + (String) responseObject.get("OrderId") + ". The order status is "
+						+ (String) responseObject.get(ACCLConstant.ORDER_STATUS_TEXT) + ". Order total is "
+						+ (String) responseObject.get("orderTotal") + " "
+						+ (String) responseObject.get("orderCurrency");
+			else
+				speechString = "Invalid order id";
+		} else {
+			speechString = "I can not process this request";
+		}
 		System.out.println("Reponse: " + speechString);
 		botResponseObject.put("speech", speechString);
 		botResponseObject.put("text", speechString);
