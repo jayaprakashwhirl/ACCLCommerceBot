@@ -6,5 +6,7 @@
 	<classpathentry kind="con" path="com.amazonaws.eclipse.lambda.AWS_LAMBDA_JAVA_CLASSPATH_CONTAINER"/>
 	<classpathentry kind="src" path="tst"/>
 	<classpathentry kind="lib" path="/Users/araramalingam/Documents/java jars/json-simple-1.1.jar"/>
+	<classpathentry kind="lib" path="/Users/araramalingam/Documents/java jars/aws-java-sdk-core-1.9.8.jar.zip"/>
+	<classpathentry kind="con" path="com.amazonaws.eclipse.sdk.AWS_JAVA_SDK"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

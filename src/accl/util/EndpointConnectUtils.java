@@ -22,8 +22,8 @@ public class EndpointConnectUtils {
 			con.setRequestProperty("User-Agent", ACCLConstant.USER_AGENT);
 
 			int responseCode = con.getResponseCode();
-//			System.out.println("\nSending 'GET' request to URL : " + url);
-//			System.out.println("Response Code : " + responseCode);
+			// System.out.println("\nSending 'GET' request to URL : " + url);
+			// System.out.println("Response Code : " + responseCode);
 
 			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
 			String inputLine;
@@ -37,6 +37,8 @@ public class EndpointConnectUtils {
 			// print result
 			JSONParser parser = new JSONParser();
 			responseObject = (JSONObject) parser.parse(response.toString());
+			System.out.println("Response=====");
+			System.out.println(responseObject);
 		} catch (Exception e) {
 
 		}

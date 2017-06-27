@@ -4,6 +4,7 @@ import org.json.simple.JSONObject;
 
 import accl.service.OrderStatusService;
 import accl.util.ACCLConstant;
+import accl.util.EndpointLookupManager;
 
 public class DummyCall {
 
@@ -12,8 +13,12 @@ public class DummyCall {
 		JSONObject request = new JSONObject();
 		JSONObject response = new JSONObject();
 		String orderId = "100000031";
+		
+		
+		
 		request.put(ACCLConstant.SERVICE_REQUEST_TEXT, ACCLConstant.ORDER_STATUS_TEXT);
 		request.put(ACCLConstant.ORDER_ID_TEXT, orderId);
+		request.put("clientId", "dilsebol");
 
 		switch ((String) request.get(ACCLConstant.SERVICE_REQUEST_TEXT)) {
 		case ACCLConstant.ORDER_STATUS_TEXT:

@@ -4,6 +4,7 @@ import org.json.simple.JSONObject;
 
 import accl.util.ACCLConstant;
 import accl.util.EndpointConnectUtils;
+import accl.util.EndpointLookupManager;
 
 /*
  * THIS CLASS WILL HANDLE ALL THE REQUESTS RELATED TO ORDERS 
@@ -14,21 +15,34 @@ import accl.util.EndpointConnectUtils;
 public class OrderStatusService {
 
 	public JSONObject run(JSONObject request) {
+		EndpointLookupManager endpointLookupManager = new EndpointLookupManager();
 		JSONObject responseObject = null;
+		String clientId = (String) request.get(ACCLConstant.CLIENT_ID_TEXT);
+		String serviceRequest = (String) request.get(ACCLConstant.SERVICE_REQUEST_TEXT);
+		String serviceEndpoint = endpointLookupManager.getEndPoint(clientId, serviceRequest);
+		System.out.println("Service endpoint url: " + serviceEndpoint);
+
 		if (request.get(ACCLConstant.ORDER_ID_TEXT) != null) {
 			System.out.println("Order id is exist");
 			EndpointConnectUtils endpointUtil = new EndpointConnectUtils();
-			responseObject = endpointUtil.getRequest("http://c7bd04ba.ngrok.io/dilsebol2/acclerator?order_id="
-					+ request.get(ACCLConstant.ORDER_ID_TEXT));
+			responseObject = endpointUtil
+					.getRequest(serviceEndpoint + "?order_id=" + request.get(ACCLConstant.ORDER_ID_TEXT));
 			return responseBuilder(responseObject);
 		}
 		return responseObject;
 	}
 
-	@SuppressWarnings({ "null", "unchecked" })
+	@SuppressWarnings({ "unchecked" })
 	public JSONObject responseBuilder(JSONObject responseObject) {
 		JSONObject botResponseObject = new JSONObject();
-		String speechString = "The order status is: " + (String) responseObject.get(ACCLConstant.ORDER_STATUS_TEXT);
+		String speechString = "";
+		if ((String) responseObject.get(ACCLConstant.ORDER_STATUS_TEXT) != null)
+			speechString = "your order id is " + (String) responseObject.get("OrderId") + ". The order status is "
+					+ (String) responseObject.get(ACCLConstant.ORDER_STATUS_TEXT) + ". Order total is "
+					+ (String) responseObject.get("orderTotal") + " " + (String) responseObject.get("orderCurrency");
+		else
+			speechString = "Invalid order id";
+		System.out.println("Reponse: " + speechString);
 		botResponseObject.put("speech", speechString);
 		botResponseObject.put("text", speechString);
 		return botResponseObject;
